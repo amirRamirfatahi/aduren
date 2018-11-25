@@ -241,7 +241,7 @@
 	<div class="panel panel-default">
 		<div class="panel-body" align="center">
             {% for client in about.clients.all %}
-			<a href="{{ client.homepage_url }}"><img src="/media/{{ client.logo.name }}" width="150" height="150"></a>
+			<img src="/media/{{ client.logo.name }}" width="150" height="150">
             {% endfor %}
 		</div>
 	</div>	
@@ -300,7 +300,7 @@
 					speed: 2,
   					loop:false,
   					autoplay: false,
-  					path: 'js/sdata.json'
+  					path: '{% static "core/aduren/js/sdata.json" %}'
 				});	
 			}
 		});
