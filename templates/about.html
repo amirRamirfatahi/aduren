@@ -241,7 +241,7 @@
 	<div class="panel panel-default">
 		<div class="panel-body" align="center">
             {% for client in about.clients.all %}
-			<img src="/media/{{ client.logo.name }}" width="150" height="150">
+			<a href="{{ client.homepage_url }}"><img src="/media/{{ client.logo.name }}" width="150" height="150"></a>
             {% endfor %}
 		</div>
 	</div>	
