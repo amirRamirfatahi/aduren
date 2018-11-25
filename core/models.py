@@ -39,6 +39,10 @@ class SingletonBaseModel(models.Model):
 class FirstPageProjects(SingletonBaseModel):
     projects = models.ManyToManyField(Project, related_name='first_page_projects')
 
+    class Meta:
+        verbose_name = 'First Page Projects'
+        verbose_name_plural = 'First Page Projects'
+
 
 class ContactUs(SingletonBaseModel):
     google_maps_embed_html = models.TextField(verbose_name='google maps embeded html')
@@ -50,6 +54,10 @@ class ContactUs(SingletonBaseModel):
     instagram = models.URLField(verbose_name='instagram', null=True, blank=True)
     linkedin = models.URLField(verbose_name='linkedin url', null=True, blank=True)
     youtube = models.URLField(verbose_name='youtube url', null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Contact Us'
+        verbose_name_plural = 'Contact Us'
 
 
 class SlideShowPicture(models.Model):
@@ -94,3 +102,7 @@ class AboutUs(SingletonBaseModel):
     artists = models.ManyToManyField(Artist, verbose_name='artists', related_name='artists')
     clients = models.ManyToManyField(Client, verbose_name='clients', related_name='clients')
     services = models.ManyToManyField(Service, verbose_name='services', related_name='services')
+
+    class Meta:
+        verbose_name = 'About us'
+        verbose_name_plural = 'About us'
