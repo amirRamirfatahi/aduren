@@ -76,17 +76,17 @@ class SlideShowPicture(models.Model):
 
 class Award(models.Model):
     title = models.CharField(max_length=300, verbose_name='title')
-    image = models.ImageField(upload_to='prizes/')
+    image = models.ImageField(upload_to='prizes/', null=True, blank=True)
 
 
 class Founder(models.Model):
     description = models.TextField(verbose_name='description')
-    image = models.ImageField(verbose_name='image', upload_to='founders/')
+    image = models.ImageField(verbose_name='image', upload_to='founders/', null=True, blank=True)
 
 
 class Artist(models.Model):
     name = models.CharField(max_length=500, verbose_name='name')
-    image = models.ImageField(verbose_name='image', upload_to='artists/')
+    image = models.ImageField(verbose_name='image', upload_to='artists/', null=True, blank=True)
 
 
 class Client(models.Model):
@@ -96,12 +96,13 @@ class Client(models.Model):
 
 class Service(models.Model):
     description = models.TextField(verbose_name='description', null=True, blank=True)
-    image = models.ImageField(verbose_name='image', upload_to='services/')
+    image = models.ImageField(verbose_name='image', upload_to='services/', null=True, blank=True)
 
 
 class AboutUs(SingletonBaseModel):
     slide_show_pictures = models.ManyToManyField(SlideShowPicture, verbose_name='slide show pictures',
                                                  related_name='slide_show_pictures', blank=True)
+    about_us_short = models.TextField(verbose_name='about us short description', null=True, blank=True)
     about_us_text = models.TextField(verbose_name='about us text', null=True, blank=True)
     aduren_reel_vimeo_url = models.URLField(verbose_name='Aduren Reel Vimeo URL', null=True, blank=True)
     awards = models.ManyToManyField(Award, verbose_name='awards', related_name='awards', blank=True)
