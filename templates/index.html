@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="designer" content="Iman Yari">
+<title>Aduren Studio</title>
+
+<!-- Bootstrap -->
+<link href="{% static "core/aduren/css/bootstrap.css" %}" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<style>
+	.pft {
+		margin-bottom: 15px;
+	}
+	.wipe {
+  		position: absolute;
+  		top: 0;
+  		bottom: 0;
+  		left: 0;
+  		right: 0;
+  		height: 100%;
+  		width: 100%;
+	}
+	.overlay {
+  		position: absolute;
+  		top: 0;
+  		bottom: 0;
+  		left: 0;
+  		right: 0;
+  		height: 100%;
+  		width: 100%;
+  		opacity: 0;
+  		transition: .3s ease;
+	}
+	.pft:hover .overlay {
+		opacity: 1;
+	}
+	.caption {
+		position: absolute;
+		bottom: 0;
+		left: 15px;
+		margin-bottom: 10px;
+		color: white;
+	}
+	.caption :link :hover {
+		color: white;
+	}
+	h3 {
+		font-weight: bolder;
+		line-height: 10px;
+	}
+	h5 {
+		font-weight: bold;
+	}
+	.navbar-toggle {
+		height: 30px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+</style>
+</head>
+<body>
+
+<div class="container" id="header">
+<nav class="navbar navbar-default">
+
+  <div class="container"> 
+    <div class="navbar-header">
+		<div class="navbar-brand"><a href="index.html"><img src="{% static "core/aduren/Aduren-Logo.svg" %}"
+                                                            height="60px"
+                                                            alt=""/></a></div>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+      </div>
+    <div class="collapse navbar-collapse" id="defaultNavbar1">
+      <ul class="nav navbar-nav pull-right">
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="about.html">About</a></li>
+		  <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>
+	
+<div class="container">
+
+<div class="row" id="Thumbnails">
+    {% for project in first_page_projects %}
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pft" onMouseOver="wipeIn(this.id);" onMouseOut="wipeOut(this.id);">
+	        <img class="img-responsive" src="media/{{ project.thumbnail.name }}" alt=""/>
+		    <div class="wipe"></div>
+		    <a href="ProjectItem.html">
+			    <div class="overlay">
+			        <div class="caption">
+                        <h3>{{ project.title }}</h3>
+                        <h5>{{ project.short_description }}</h5>
+                        <h6>{{ project.production_year }}</h6>
+			        </div>
+		        </div>
+		    </a>
+	    </div>
+    {% endfor %}
+</div>
+
+	
+<hr class="btn-info">
+
+  <div class="row" id="footer">
+    <div class="text-center col-md-6 col-md-offset-3">
+      <p>Copyright &copy; 2018 &middot; All Rights Reserved &middot; <a href="/" >Aduren Studio</a></p>
+    </div>
+  </div>
+	<hr class="btn-success">
+</div>
+
+	
+<script src="{% static "/core/aduren/js/jquery-1.11.3.min.js" %}"></script>
+<script src="{% static "/core/aduren/js/bootstrap.js" %}"></script>
+<script src="{% static "/core/aduren/js/lottie.js" %}"></script>
+<script>
+
+		var anim = [];
+		var WContainer;
+		var TList = document.getElementById("Thumbnails").children;
+		var TNL = [];
+											   
+		 $(document).ready(function(){
+			var i;
+			for (i = 0; i < TList.length; i++) {
+				
+				WContainer = TList[i].children[1];
+				TList[i].id = "TN" + i;
+				TNL.push("TN"+i);
+				
+				anim[i] = bodymovin.loadAnimation({
+					container: WContainer,
+  					renderer: 'svg',
+					speed: 2,
+  					loop:false,
+  					autoplay: false,
+  					path: 'js/data.json'
+				});	
+			}
+		});
+				  
+		function wipeIn(cid){
+			var io = TNL.indexOf(cid);
+			anim[io].setDirection(1);
+			anim[io].play();
+		}
+
+		function wipeOut(cid){
+			var io = TNL.indexOf(cid);
+			anim[io].setDirection(-1);
+			anim[io].play();
+		}
+</script>
+</body>
+</html>
