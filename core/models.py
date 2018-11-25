@@ -48,7 +48,7 @@ class FirstPageProjects(SingletonBaseModel):
 
 
 class ContactUs(SingletonBaseModel):
-    google_maps_embed_html = models.TextField(verbose_name='google maps embeded html', null=True, blank=True)
+    google_maps_src = models.URLField(verbose_name='google maps src', null=True, blank=True)
     address = models.TextField(verbose_name='address', null=True, blank=True)
     telephones = ArrayField(models.CharField(max_length=30), null=True, blank=True, verbose_name='telephone numbers')
     faxes = ArrayField(models.CharField(max_length=30), null=True, blank=True, verbose_name='fax numbers')
