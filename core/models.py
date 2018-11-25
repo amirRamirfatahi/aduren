@@ -78,25 +78,39 @@ class Award(models.Model):
     title = models.CharField(max_length=300, verbose_name='title')
     image = models.ImageField(upload_to='prizes/', null=True, blank=True)
 
+    def __str__(self):
+        return "award {title}".format(title=self.title)
+
 
 class Founder(models.Model):
     description = models.TextField(verbose_name='description')
     image = models.ImageField(verbose_name='image', upload_to='founders/', null=True, blank=True)
+
+    def __str__(self):
+        return "founder {description}".format(description=self.description[:50])
 
 
 class Artist(models.Model):
     name = models.CharField(max_length=500, verbose_name='name')
     image = models.ImageField(verbose_name='image', upload_to='artists/', null=True, blank=True)
 
+    def __str__(self):
+        return "artist {name}".format(name=self.name)
+
 
 class Client(models.Model):
     homepage_url = models.URLField(verbose_name='homepage url', null=True, blank=True, max_length=1000)
     logo = models.ImageField(verbose_name='logo', upload_to='clients/')
 
+    def __str__(self):
+        return "client {logo}/{url}".format(logo=self.logo.name, url=self.homepage_url[:30])
 
 class Service(models.Model):
     description = models.TextField(verbose_name='description', null=True, blank=True)
     image = models.ImageField(verbose_name='image', upload_to='services/', null=True, blank=True)
+
+    def __str__(self):
+        return "service {image}/{description}".format(image=self.image.name, description=self.description[:30])
 
 
 class AboutUs(SingletonBaseModel):
