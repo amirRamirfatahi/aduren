@@ -39,14 +39,17 @@ class SingletonBaseModel(models.Model):
 class FirstPageProjects(SingletonBaseModel):
     projects = models.ManyToManyField(Project, related_name='first_page_projects')
 
+    def __str__(self):
+        return "First Page Projects"
+
     class Meta:
         verbose_name = 'First Page Projects'
         verbose_name_plural = 'First Page Projects'
 
 
 class ContactUs(SingletonBaseModel):
-    google_maps_embed_html = models.TextField(verbose_name='google maps embeded html')
-    address = models.TextField(verbose_name='address')
+    google_maps_embed_html = models.TextField(verbose_name='google maps embeded html', null=True, blank=True)
+    address = models.TextField(verbose_name='address', null=True, blank=True)
     telephones = ArrayField(models.CharField(max_length=30), null=True, blank=True, verbose_name='telephone numbers')
     faxes = ArrayField(models.CharField(max_length=30), null=True, blank=True, verbose_name='fax numbers')
     facebook = models.URLField(verbose_name='facebook url', null=True, blank=True)
@@ -54,6 +57,9 @@ class ContactUs(SingletonBaseModel):
     instagram = models.URLField(verbose_name='instagram', null=True, blank=True)
     linkedin = models.URLField(verbose_name='linkedin url', null=True, blank=True)
     youtube = models.URLField(verbose_name='youtube url', null=True, blank=True)
+
+    def __str__(self):
+        return 'Contact Us'
 
     class Meta:
         verbose_name = 'Contact Us'
@@ -94,14 +100,17 @@ class Service(models.Model):
 
 class AboutUs(SingletonBaseModel):
     slide_show_pictures = models.ManyToManyField(SlideShowPicture, verbose_name='slide show pictures',
-                                                 related_name='slide_show_pictures')
-    about_us_text = models.TextField(verbose_name='about us text')
-    aduren_reel_vimeo_url = models.URLField(verbose_name='Aduren Reel Vimeo URL')
-    prizes = models.ManyToManyField(Prize, verbose_name='prizes', related_name='prizes')
-    founders = models.ManyToManyField(Founder, verbose_name='founders', related_name='founders')
-    artists = models.ManyToManyField(Artist, verbose_name='artists', related_name='artists')
-    clients = models.ManyToManyField(Client, verbose_name='clients', related_name='clients')
-    services = models.ManyToManyField(Service, verbose_name='services', related_name='services')
+                                                 related_name='slide_show_pictures', blank=True)
+    about_us_text = models.TextField(verbose_name='about us text', null=True, blank=True)
+    aduren_reel_vimeo_url = models.URLField(verbose_name='Aduren Reel Vimeo URL', null=True, blank=True)
+    prizes = models.ManyToManyField(Prize, verbose_name='prizes', related_name='prizes', blank=True)
+    founders = models.ManyToManyField(Founder, verbose_name='founders', related_name='founders', blank=True)
+    artists = models.ManyToManyField(Artist, verbose_name='artists', related_name='artists', blank=True)
+    clients = models.ManyToManyField(Client, verbose_name='clients', related_name='clients', blank=True)
+    services = models.ManyToManyField(Service, verbose_name='services', related_name='services', blank=True)
+
+    def __str__(self):
+        return 'About Us'
 
     class Meta:
         verbose_name = 'About us'
