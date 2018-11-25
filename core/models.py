@@ -9,7 +9,7 @@ def upload_path(instance, filename):
 class Project(models.Model):
     title = models.CharField(verbose_name='name', max_length=300)
     thumbnail = models.ImageField(verbose_name='thumbnail', upload_to=upload_path)
-    vimeo_url = models.URLField(verbose_name='vimeo url', null=True, blank=True)
+    vimeo_url = models.URLField(verbose_name='vimeo url', null=True, blank=True, max_length=1000)
     short_description = models.CharField(verbose_name='short description', max_length=1000, null=True, blank=True)
     full_description = models.TextField(verbose_name='full description', null=True, blank=True)
     production_year = models.CharField(verbose_name='production year', max_length=10, null=True, blank=True)
@@ -53,11 +53,11 @@ class ContactUs(SingletonBaseModel):
     telephones = ArrayField(models.CharField(max_length=30), null=True, blank=True, verbose_name='telephone numbers')
     faxes = ArrayField(models.CharField(max_length=30), null=True, blank=True, verbose_name='fax numbers')
     email = models.EmailField(verbose_name='email', null=True, blank=True)
-    facebook = models.URLField(verbose_name='facebook url', null=True, blank=True)
-    twitter = models.URLField(verbose_name='twitter url', null=True, blank=True)
-    instagram = models.URLField(verbose_name='instagram', null=True, blank=True)
-    linkedin = models.URLField(verbose_name='linkedin url', null=True, blank=True)
-    youtube = models.URLField(verbose_name='youtube url', null=True, blank=True)
+    facebook = models.URLField(verbose_name='facebook url', null=True, blank=True, max_length=1000)
+    twitter = models.URLField(verbose_name='twitter url', null=True, blank=True, max_length=1000)
+    instagram = models.URLField(verbose_name='instagram', null=True, blank=True, max_length=1000)
+    linkedin = models.URLField(verbose_name='linkedin url', null=True, blank=True, max_length=1000)
+    youtube = models.URLField(verbose_name='youtube url', null=True, blank=True, max_length=1000)
 
     def __str__(self):
         return 'Contact Us'
@@ -90,7 +90,7 @@ class Artist(models.Model):
 
 
 class Client(models.Model):
-    homepage_url = models.URLField(verbose_name='homepage url', null=True, blank=True)
+    homepage_url = models.URLField(verbose_name='homepage url', null=True, blank=True, max_length=1000)
     logo = models.ImageField(verbose_name='logo', upload_to='clients/')
 
 
@@ -104,7 +104,7 @@ class AboutUs(SingletonBaseModel):
                                                  related_name='slide_show_pictures', blank=True)
     about_us_short = models.TextField(verbose_name='about us short description', null=True, blank=True)
     about_us_text = models.TextField(verbose_name='about us text', null=True, blank=True)
-    aduren_reel_vimeo_url = models.URLField(verbose_name='Aduren Reel Vimeo URL', null=True, blank=True)
+    aduren_reel_vimeo_url = models.URLField(verbose_name='Aduren Reel Vimeo URL', null=True, blank=True, max_length=1000)
     awards = models.ManyToManyField(Award, verbose_name='awards', related_name='awards', blank=True)
     founders = models.ManyToManyField(Founder, verbose_name='founders', related_name='founders', blank=True)
     artists = models.ManyToManyField(Artist, verbose_name='artists', related_name='artists', blank=True)
