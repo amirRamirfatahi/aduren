@@ -52,6 +52,7 @@ class ContactUs(SingletonBaseModel):
     address = models.TextField(verbose_name='address', null=True, blank=True)
     telephones = ArrayField(models.CharField(max_length=30), null=True, blank=True, verbose_name='telephone numbers')
     faxes = ArrayField(models.CharField(max_length=30), null=True, blank=True, verbose_name='fax numbers')
+    email = models.EmailField(verbose_name='email', null=True, blank=True)
     facebook = models.URLField(verbose_name='facebook url', null=True, blank=True)
     twitter = models.URLField(verbose_name='twitter url', null=True, blank=True)
     instagram = models.URLField(verbose_name='instagram', null=True, blank=True)
