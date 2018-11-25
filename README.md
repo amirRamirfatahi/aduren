@@ -18,7 +18,7 @@ postgres=# alter role aduren with encrypted password 'bFg7VFV8';
 django
 ```bash
 python manage.py migrate
-python manage.py createsuperuser #username:adurenadmin password:yfHyWa8Yfjg4Wuvx
+python manage.py createsuperuser
 
 ```
 
