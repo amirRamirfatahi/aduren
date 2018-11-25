@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from core.models import FirstPageProjects, Project
+from core.models import FirstPageProjects, Project, ContactUs, AboutUs
 
 
 class IndexView(TemplateView):
@@ -21,5 +21,35 @@ class ProjectView(TemplateView):
         return context
 
 
+class PortfolioView(TemplateView):
+    template_name = 'portfolio.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PortfolioView, self).get_context_data(**kwargs)
+        context['projects'] = Project.objects.all()
+        return context
+
+
+class ContactUsView(TemplateView):
+    template_name = 'contact.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ContactUsView, self).get_context_data(**kwargs)
+        context['contact'] = ContactUs.load()
+        return context
+
+
+class AboutUsView(TemplateView):
+    template_name = 'about.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutUsView, self).get_context_data(**kwargs)
+        context['about'] = AboutUs.load()
+        return context
+
+
 index_view = IndexView.as_view()
 project_view = ProjectView.as_view()
+portfolio_view = PortfolioView.as_view()
+contact_view = ContactUsView.as_view()
+about_view = AboutUsView.as_view()
