@@ -175,11 +175,9 @@
 <!-- About Section -->		
 		<div class="panel-body">
 			
-			<p style="font-size: 16; font-weight: bold" align="justify">{{ about.about_us_short|linebreaksbr }}</p>
-		  	<p align="justify">
-				{{ about.about_us_text|linebreaksbr }}
-			</p>
-			
+			<p style="font-size: 16; font-weight: bold" align="justify">
+                {{ about.about_us_text|safe }}
+            </p>
 		</div>
 
 <!-- Reel Section -->

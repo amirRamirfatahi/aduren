@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from core.views import index_view, project_view, portfolio_view, contact_view, about_view
 
@@ -26,6 +26,7 @@ urlpatterns = [
                   path('project/<project_id>/', project_view),
                   path('portfolio/', portfolio_view),
                   path('contact/', contact_view),
-                  path('about/', about_view)
+                  path('about/', about_view),
+                  path('summernote/', include('django_summernote.urls'))
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -116,7 +116,6 @@ class Service(models.Model):
 class AboutUs(SingletonBaseModel):
     slide_show_pictures = models.ManyToManyField(SlideShowPicture, verbose_name='slide show pictures',
                                                  related_name='slide_show_pictures', blank=True)
-    about_us_short = models.TextField(verbose_name='about us short description', null=True, blank=True)
     about_us_text = models.TextField(verbose_name='about us text', null=True, blank=True)
     aduren_reel_vimeo_url = models.URLField(verbose_name='Aduren Reel Vimeo URL', null=True, blank=True, max_length=1000)
     awards = models.ManyToManyField(Award, verbose_name='awards', related_name='awards', blank=True)

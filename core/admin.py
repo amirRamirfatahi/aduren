@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Project, FirstPageProjects, ContactUs, SlideShowPicture, Award, Founder, Artist, Client, Service \
     , AboutUs
 
@@ -26,8 +26,9 @@ class ContactUsAdmin(admin.ModelAdmin):
         return True
 
 
-class AboutUsAdmin(admin.ModelAdmin):
+class AboutUsAdmin(SummernoteModelAdmin):
     filter_horizontal = ('slide_show_pictures', 'awards', 'founders', 'artists', 'clients', 'services')
+    summernote_fields = ('about_us_text',)
 
     def has_add_permission(self, request):
         model = self.model
