@@ -3,7 +3,7 @@ from django.db import models
 
 
 def upload_path(instance, filename):
-    return "{project_name}/{filename}".format(project_name=instance.title, filename=filename)
+    return "projects/{project_name}/{filename}".format(project_name=instance.title, filename=filename)
 
 
 class Project(models.Model):
@@ -12,7 +12,7 @@ class Project(models.Model):
     vimeo_url = models.URLField(verbose_name='vimeo url', null=True, blank=True)
     short_description = models.CharField(verbose_name='short description', max_length=1000, null=True, blank=True)
     full_description = models.TextField(verbose_name='full description', null=True, blank=True)
-    production_year = models.CharField(verbose_name='production year', max_length=10)
+    production_year = models.CharField(verbose_name='production year', max_length=10, null=True, blank=True)
     image = models.ImageField(verbose_name='image', upload_to=upload_path)
 
     def __str__(self):
