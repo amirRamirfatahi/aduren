@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,7 @@
 <title>Aduren Studio</title>
 
 <!-- Bootstrap -->
-<link href="CSS/bootstrap.css" rel="stylesheet">
+<link href="{% static "core/aduren/css/bootstrap.css" %}" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -122,14 +123,16 @@
 
   <div class="container"> 
     <div class="navbar-header">
-		<div class="navbar-brand"><a href="index.html"><img src="images/Aduren-Logo.svg" height="60px" alt=""/></a></div>
+		<div class="navbar-brand"><a href="/"><img src="{% static "core/aduren/Aduren-Logo.svg" %}"
+                                                            height="60px"
+                                                            alt=""/></a></div>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       </div>
     <div class="collapse navbar-collapse" id="defaultNavbar1">
       <ul class="nav navbar-nav pull-right">
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="about.html">About</a></li>
-		  <li><a href="contact.html">Contact</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+        <li><a href="/about/">About</a></li>
+		  <li><a href="/contact/">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -143,24 +146,19 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+      {% for picture in about.slide_show_pictures.all %}
+    <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}"
+        {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
+      {% endfor %}
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
-    <div class="item active">
-      <img src="images/Slide/01.jpg">
+      {% for picture in about.slide_show_pictures.all %}
+    <div class="item {% if forloop.counter0 == 0 %}active{% endif %}">
+      <img src="/media/{{ picture.image.name }}">
     </div>
-
-    <div class="item">
-      <img src="images/Slide/02.jpg">
-    </div>
-
-    <div class="item">
-      <img src="images/Slide/03.jpg">
-    </div>
+      {% endfor %}
   </div>
 
   <!-- Left and right controls -->
@@ -177,10 +175,9 @@
 <!-- About Section -->		
 		<div class="panel-body">
 			
-			<p style="font-size: 16; font-weight: bold" align="justify">Buck is a design-driven production company. We are an integrated collective of designers, artists and storytellers, who believe in the power of collaboration—the special alchemy that only happens when working together toward a common purpose.Let's collaborate!</p>
+			<p style="font-size: 16; font-weight: bold" align="justify">{{ about.about_us_short|linebreaksbr }}</p>
 		  	<p align="justify">
-				Buck is a design-driven production company. We are an integrated collective of designers, artists and storytellers, who believe in the power of collaboration—the special alchemy that only happens when working together toward a common purpose.Let's collaborate!
-From offices in Los Angeles, New York and Sydney, Buck works with a broad range of clients in the advertising, broadcast, film and entertainment industries. We take our work seriously, but not ourselves. This attitude is reflected in our workplace, where we strive daily to create an environment that breeds a culture of excellence, while remaining fun, collaborative, and ego-free.
+				{{ about.about_us_text|linebreaksbr }}
 			</p>
 			
 		</div>
@@ -191,7 +188,9 @@ From offices in Los Angeles, New York and Sydney, Buck works with a broad range 
 	<div class="panel panel-default">
 
 		<div style="padding:56.25% 0 0 0;position:relative;">
-			<iframe src="https://player.vimeo.com/video/294902255?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+			<iframe src="{{ about.aduren_reel_vimeo_url }}?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;
+			height:100%;"
+                    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 		</div>
 		
 	</div>
@@ -200,62 +199,40 @@ From offices in Los Angeles, New York and Sydney, Buck works with a broad range 
 		<hr>
 		<h4>Aduren Awards</h4>
 	<div class="panel panel-default" align="center">
-
+        {% for award in about.awards.all %}
 		<figure class="figure figure-centered">
-		  <img src="images/Awards/oscar.jpg" width="200" height="200" class="figure-img img-circle">
-		  <figcaption class="figure-caption text-center">Award 1 caption</figcaption>
+            {% if award.image %}
+		  <img src="/media/{{ award.image.name }}" width="200" height="200" class="figure-img img-circle">
+            {% endif %}
+		  <figcaption class="figure-caption text-center">{{ award.title }}</figcaption>
 		</figure>
-		
-		<figure class="figure figure-centered">
-		  <img src="images/Awards/oscar.jpg" width="200" height="200" class="figure-img img-circle">
-		  <figcaption class="figure-caption text-center">Award 2 caption</figcaption>
-		</figure>	
-		
-		<figure class="figure figure-centered">
-		  <img src="images/Awards/oscar.jpg" width="200" height="200" class="figure-img img-circle">
-		  <figcaption class="figure-caption text-center">Award 3 caption</figcaption>
-		</figure>	
-
-
+        {% endfor %}
 	</div>
 	
 <!-- Founders Section -->
 		<hr>
 		<h4>Aduren Co-Founders</h4>
 	<div class="row">
+        {% for founder in about.founders.all %}
 		<div class="col-lg-6">
 			<div class="panel-body">
-				<p align="center"><img src="images/Founders/01.jpg" width="200" height="200" class="img-circle"></p>
-				<p align="justify">The true story of how Ray Kroc (Michael Keaton), a struggling salesman from Illinois, met Mac (John Carroll Lynch) and Dick McDonald (Nick Offerman), who were running a burger operation in 1950s Southern California. Kroc was impressed by the brothers' speedy system of making the food and saw franchi</p>
+				<p align="center"><img src="/media/{{ founder.image.name }}" width="200" height="200"
+                                       class="img-circle"></p>
+				<p align="justify">{{ founder.description }}</p>
 			</div>
 		</div>
-		
-		<div class="col-lg-6">
-			<div class="panel-body">
-				<p align="center"><img src="images/Founders/02.jpg" width="200" height="200" class="img-circle"></p>
-				<p align="justify">The true story of how Ray Kroc (Michael Keaton), a struggling salesman from Illinois, met Mac (John Carroll Lynch) and Dick McDonald (Nick Offerman), who were running a burger operation in 1950s Southern California. Kroc was impressed by the brothers' speedy system of making the food and saw franchi</p>
-			</div>
-		</div>
+        {% endfor %}
 	</div>
 
 <!-- Artists Section -->
 		<hr>
 		<h4>Aduren Artists</h4>
 	<div class="panel panel-default" align="center">
-
-		<div class="artist" style="background-image: url(images/Founders/01.jpg)">
-		  <div class="text-block"><div class="artist-caption">Artist 1</div></div>
-		</div>	
-		<div class="artist" style="background-image: url(images/Founders/02.jpg)">
-		  <div class="text-block"><div class="artist-caption">Artist 2</div></div>
-		</div>	
-		<div class="artist" style="background-image: url(images/Founders/03.jpg)">
-		  <div class="text-block"><div class="artist-caption">Artist 3</div></div>
-		</div>	
-		<div class="artist" style="background-image: url(images/Founders/04.jpg)">
-		  <div class="text-block"><div class="artist-caption">Artist 4</div></div>
-		</div>	
-
+        {% for artist in about.artists.all %}
+		<div class="artist" style="background-image: url(/media/{{ artist.image.name }})">
+		  <div class="text-block"><div class="artist-caption">{{ artist.name }}</div></div>
+		</div>
+        {% endfor %}
 	</div>
 	
 <!-- Clients Section -->
@@ -263,49 +240,27 @@ From offices in Los Angeles, New York and Sydney, Buck works with a broad range 
 		<h4>Aduren Clients</h4>
 	<div class="panel panel-default">
 		<div class="panel-body" align="center">
-			<img src="images/Clients/01.png" width="150" height="150">
-			<img src="images/Clients/04.png" width="150" height="150">
-			<img src="images/Clients/05.png" width="150" height="150">
-			<img src="images/Clients/06.png" width="150" height="150">
-			<img src="images/Clients/07.png" width="150" height="150">
+            {% for client in about.clients.all %}
+			<a href="{{ client.homepage_url }}"><img src="/media/{{ client.logo.name }}" width="150" height="150"></a>
+            {% endfor %}
 		</div>
 	</div>	
 
 <!-- Services Section -->
 		<hr>
 		<h4>Aduren Services</h4>
-<div class="row" id="Services">	
+<div class="row" id="Services">
+    {% for service in about.services.all %}
 	<div class="col-md-12 panel-service pft" onMouseOver="wipeIn(this.id);" onMouseOut="wipeOut(this.id);">
-		<img class="img-responsive" src="images/Services/05.jpg" alt=""/>
+		<img class="img-responsive" src="/media/{{ service.image.name }}" alt=""/>
 		<div class="wipe"></div>
 			<div class="overlay">
 			<div class="caption">
-			a service is a transaction in which no physical goods are transferred from the seller to the buyer. The benefits of such a service are held to be demonstrated by the buyer's willingness to make the exchange.
+			{{ service.description }}
 			</div>
 		</div>		
 	</div>
-
-	<div class="col-md-12 panel-service pft" onMouseOver="wipeIn(this.id);" onMouseOut="wipeOut(this.id);">
-		<img class="img-responsive" src="images/Services/06.jpg" alt=""/>
-		<div class="wipe"></div>
-			<div class="overlay">
-			<div class="caption">
-			a service is a transaction in which no physical goods are transferred from the seller to the buyer. The benefits of such a service are held to be demonstrated by the buyer's willingness to make the exchange.
-			</div>
-		</div>		
-	</div>
-
-	<div class="col-md-12 panel-service pft" onMouseOver="wipeIn(this.id);" onMouseOut="wipeOut(this.id);">
-		<img class="img-responsive" src="images/Services/07.jpg" alt=""/>
-		<div class="wipe"></div>
-
-			<div class="overlay">
-			<div class="caption">
-			a service is a transaction in which no physical goods are transferred from the seller to the buyer. The benefits of such a service are held to be demonstrated by the buyer's willingness to make the exchange.
-			</div>
-		</div>		
-	</div>
-
+    {% endfor %}
 	</div>
 				
 <!-- Footer -->
@@ -314,16 +269,16 @@ From offices in Los Angeles, New York and Sydney, Buck works with a broad range 
 
   <div class="row" id="footer">
     <div class="text-center col-md-6 col-md-offset-3">
-      <p>Copyright &copy; 2018 &middot; All Rights Reserved &middot; <a href="http://adurenstudio.com/" >Aduren Studio</a></p>
+      <p>Copyright &copy; 2018 &middot; All Rights Reserved &middot; <a href="/" >Aduren Studio</a></p>
     </div>
   </div>
 <hr class="btn-success">
 	
 </div>
 <script src="https://player.vimeo.com/api/player.js"></script>	
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/lottie.js"></script>
+<script src="{% static "core/aduren/js/jquery-1.11.3.min.js" %}"></script>
+<script src="{% static "core/aduren/js/bootstrap.js" %}"></script>
+<script src="{% static "core/aduren/js/lottie.js" %}"></script>
 <script>
 
 		var anim = [];
