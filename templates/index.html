@@ -83,9 +83,9 @@
       </div>
     <div class="collapse navbar-collapse" id="defaultNavbar1">
       <ul class="nav navbar-nav pull-right">
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="about.html">About</a></li>
-		  <li><a href="contact.html">Contact</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="/about">About</a></li>
+		  <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -99,12 +99,18 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pft" onMouseOver="wipeIn(this.id);" onMouseOut="wipeOut(this.id);">
 	        <img class="img-responsive" src="media/{{ project.thumbnail.name }}" alt=""/>
 		    <div class="wipe"></div>
-		    <a href="ProjectItem.html">
+		    <a href="/project/{{ project.id }}">
 			    <div class="overlay">
 			        <div class="caption">
+                        {% if project.title %}
                         <h3>{{ project.title }}</h3>
+                        {% endif %}
+                        {% if project.short_description %}
                         <h5>{{ project.short_description }}</h5>
+                        {% endif %}
+                    {% if project.production_year %}
                         <h6>{{ project.production_year }}</h6>
+                    {% endif %}
 			        </div>
 		        </div>
 		    </a>
