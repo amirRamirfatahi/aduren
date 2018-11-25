@@ -73,7 +73,7 @@ class SlideShowPicture(models.Model):
         return 'image {filename}'.format(filename=self.image.name)
 
 
-class Prize(models.Model):
+class Award(models.Model):
     title = models.CharField(max_length=300, verbose_name='title')
     image = models.ImageField(upload_to='prizes/')
 
@@ -103,7 +103,7 @@ class AboutUs(SingletonBaseModel):
                                                  related_name='slide_show_pictures', blank=True)
     about_us_text = models.TextField(verbose_name='about us text', null=True, blank=True)
     aduren_reel_vimeo_url = models.URLField(verbose_name='Aduren Reel Vimeo URL', null=True, blank=True)
-    prizes = models.ManyToManyField(Prize, verbose_name='prizes', related_name='prizes', blank=True)
+    awards = models.ManyToManyField(Award, verbose_name='awards', related_name='awards', blank=True)
     founders = models.ManyToManyField(Founder, verbose_name='founders', related_name='founders', blank=True)
     artists = models.ManyToManyField(Artist, verbose_name='artists', related_name='artists', blank=True)
     clients = models.ManyToManyField(Client, verbose_name='clients', related_name='clients', blank=True)
