@@ -12,7 +12,7 @@ postgres=# grant ALL on DATABASE aduren to aduren ;
 GRANT
 postgres=# alter role aduren with login ;
 ALTER ROLE
-postgres=# alter role aduren with encrypted password 'bFg7VFV8';
+postgres=# alter role aduren with encrypted password ********;
 ```
 
 django
