@@ -151,7 +151,7 @@
         {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
       {% endfor %}
   </ol>
-
+	{% if about.slide_show_pictures.all %}
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
       {% for picture in about.slide_show_pictures.all %}
@@ -171,7 +171,9 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-	
+	{% endif %}
+
+		{% if about.about_us_text %}
 <!-- About Section -->		
 		<div class="panel-body">
 			
@@ -179,7 +181,9 @@
                 {{ about.about_us_text|safe }}
             </p>
 		</div>
+			{% endif %}
 
+	{% if about.aduren_reel_vimeo_url %}
 <!-- Reel Section -->
 		<hr>
 		<h4>Aduren Reel</h4>
@@ -192,7 +196,9 @@
 		</div>
 		
 	</div>
+		{% endif %}
 
+	{% if about.awards.all %}
 <!-- Awards Section -->
 		<hr>
 		<h4>Aduren Awards</h4>
@@ -206,7 +212,8 @@
 		</figure>
         {% endfor %}
 	</div>
-	
+	{% endif %}
+		{% if about.founders.all %}
 <!-- Founders Section -->
 		<hr>
 		<h4>Aduren Co-Founders</h4>
@@ -221,7 +228,9 @@
 		</div>
         {% endfor %}
 	</div>
+		{% endif %}
 
+	{% if about.artists.all %}
 <!-- Artists Section -->
 		<hr>
 		<h4>Aduren Artists</h4>
@@ -232,7 +241,9 @@
 		</div>
         {% endfor %}
 	</div>
-	
+	{% endif %}
+
+    {% if about.clients.all %}
 <!-- Clients Section -->
 		<hr>
 		<h4>Aduren Clients</h4>
@@ -242,8 +253,10 @@
 			<a href="{{ client.homepage_url }}"><img src="/media/{{ client.logo.name }}" width="150" height="150"></a>
             {% endfor %}
 		</div>
-	</div>	
+	</div>
+    {% endif %}
 
+    {% if about.services.all %}
 <!-- Services Section -->
 		<hr>
 		<h4>Aduren Services</h4>
@@ -260,6 +273,7 @@
 	</div>
     {% endfor %}
 	</div>
+    {% endif %}
 				
 <!-- Footer -->
 	
