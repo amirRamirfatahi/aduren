@@ -146,15 +146,15 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-      {% for picture in about.slide_show_pictures.all %}
+      {% for picture in slide_show_pictures %}
     <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}"
         {% if forloop.counter0 == 0 %}class="active"{% endif %}></li>
       {% endfor %}
   </ol>
-	{% if about.slide_show_pictures.all %}
+	{% if slide_show_pictures %}
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
-      {% for picture in about.slide_show_pictures.all %}
+      {% for picture in slide_show_pictures %}
     <div class="item {% if forloop.counter0 == 0 %}active{% endif %}">
       <img src="/media/{{ picture.image.name }}">
     </div>
@@ -198,12 +198,12 @@
 	</div>
 		{% endif %}
 
-	{% if about.awards.all %}
+	{% if awards %}
 <!-- Awards Section -->
 		<hr>
 		<h4>Aduren Awards</h4>
 	<div class="panel panel-default" align="center">
-        {% for award in about.awards.all %}
+        {% for award in awards %}
 		<figure class="figure figure-centered">
             {% if award.image %}
 		  <img src="/media/{{ award.image.name }}" width="200" height="200" class="figure-img img-circle">
@@ -213,12 +213,12 @@
         {% endfor %}
 	</div>
 	{% endif %}
-		{% if about.founders.all %}
+		{% if founders %}
 <!-- Founders Section -->
 		<hr>
 		<h4>Aduren Co-Founders</h4>
 	<div class="row">
-        {% for founder in about.founders.all %}
+        {% for founder in founders %}
 		<div class="col-lg-6">
 			<div class="panel-body">
 				<p align="center"><img src="/media/{{ founder.image.name }}" width="200" height="200"
@@ -230,12 +230,12 @@
 	</div>
 		{% endif %}
 
-	{% if about.artists.all %}
+	{% if artists %}
 <!-- Artists Section -->
 		<hr>
 		<h4>Aduren Artists</h4>
 	<div class="panel panel-default" align="center">
-        {% for artist in about.artists.all %}
+        {% for artist in artists %}
 		<div class="artist" style="background-image: url(/media/{{ artist.image.name }})">
 		  <div class="text-block"><div class="artist-caption">{{ artist.name }}</div></div>
 		</div>
@@ -243,25 +243,25 @@
 	</div>
 	{% endif %}
 
-    {% if about.clients.all %}
+    {% if clients %}
 <!-- Clients Section -->
 		<hr>
 		<h4>Aduren Clients</h4>
 	<div class="panel panel-default">
 		<div class="panel-body" align="center">
-            {% for client in about.clients.all %}
+            {% for client in clients %}
 			<a href="{{ client.homepage_url }}"><img src="/media/{{ client.logo.name }}" width="150" height="150"></a>
             {% endfor %}
 		</div>
 	</div>
     {% endif %}
 
-    {% if about.services.all %}
+    {% if services %}
 <!-- Services Section -->
 		<hr>
 		<h4>Aduren Services</h4>
 <div class="row" id="Services">
-    {% for service in about.services.all %}
+    {% for service in services %}
 	<div class="col-md-12 panel-service pft" onMouseOver="wipeIn(this.id);" onMouseOut="wipeOut(this.id);">
 		<img class="img-responsive" src="/media/{{ service.image.name }}" alt=""/>
 		<div class="wipe"></div>

@@ -44,7 +44,14 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
-        context['about'] = AboutUs.load()
+        about_us = AboutUs.load()
+        context['about'] = about_us
+        context['slide_show_pictures'] = about_us.slide_show_pictures.all()
+        context['awards'] = about_us.awards.all()
+        context['founders'] = about_us.founders.all()
+        context['artists'] = about_us.artists.all()
+        context['clients'] = about_us.clients.all()
+        context['services'] = about_us.services.all()
         return context
 
 
