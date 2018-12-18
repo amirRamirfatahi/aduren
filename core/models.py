@@ -1,10 +1,11 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from urllib.parse import quote, quote_plus
+from urllib.parse import quote_plus
 
 
 def upload_path(instance, filename):
-    return "projects/{project_name}/{filename}".format(project_name=quote(instance.id), filename=quote_plus(filename))
+    return "projects/{project_name}/{filename}".format(project_name=quote_plus(instance.title), filename=quote_plus(
+        filename))
 
 
 class Project(models.Model):
