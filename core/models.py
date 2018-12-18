@@ -1,10 +1,10 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-from django.utils.http import urlencode
+from urllib.parse import quote
 
 
 def upload_path(instance, filename):
-    return "projects/{project_name}/{filename}".format(project_name=urlencode(instance.title), filename=filename)
+    return "projects/{project_name}/{filename}".format(project_name=quote(instance.title), filename=quote(filename))
 
 
 class Project(models.Model):
