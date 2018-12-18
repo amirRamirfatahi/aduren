@@ -4,7 +4,7 @@ from urllib.parse import quote, quote_plus
 
 
 def upload_path(instance, filename):
-    return "projects/{project_name}/{filename}".format(project_name=quote(instance.title), filename=quote_plus(filename))
+    return "projects/{project_name}/{filename}".format(project_name=quote(instance.id), filename=quote_plus(filename))
 
 
 class Project(models.Model):
