@@ -8,7 +8,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['first_page_projects'] = FirstPageProjects.load().projects.all()
+        context['first_page_projects'] = FirstPageProjects.load().projects.all().order_by('ordering')
         return context
 
 
@@ -26,7 +26,7 @@ class PortfolioView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PortfolioView, self).get_context_data(**kwargs)
-        context['projects'] = Project.objects.all()
+        context['projects'] = Project.objects.all().order_by('ordering')
         return context
 
 

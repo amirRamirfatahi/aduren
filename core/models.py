@@ -1,9 +1,10 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django.utils.http import urlencode
 
 
 def upload_path(instance, filename):
-    return "projects/{project_name}/{filename}".format(project_name=instance.title, filename=filename)
+    return "projects/{project_name}/{filename}".format(project_name=urlencode(instance.title), filename=filename)
 
 
 class Project(models.Model):
@@ -14,6 +15,7 @@ class Project(models.Model):
     full_description = models.TextField(verbose_name='full description', null=True, blank=True)
     production_year = models.CharField(verbose_name='production year', max_length=10, null=True, blank=True)
     image = models.ImageField(verbose_name='image', upload_to=upload_path)
+    ordering = models.IntegerField(verbose_name='ordering', default=1)
 
     def __str__(self):
         return 'project {title}'.format(title=self.title)
