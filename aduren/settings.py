@@ -25,7 +25,7 @@ SECRET_KEY = 'rzr(+*bf53&^@eiykt)jaqql=i&+qld5*9der(uq#fzr*y^kds'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '185.173.104.206']
+ALLOWED_HOSTS = ['localhost', '185.173.104.206', 'adurenstudio.com']
 
 
 # Application definition
